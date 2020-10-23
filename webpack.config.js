@@ -1,26 +1,26 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   entry: {
-    app: "./src/app/index.js"
+    app: './src/app/index.js',
   },
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   devServer: {
-    contentBase: "./dist"
+    contentBase: './dist',
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new HtmlWebpackPlugin({
-      title: "App - Development",
-      template: "./src/app/index.html"
-    })
+      title: 'App - Development',
+      template: './src/app/index.html',
+    }),
   ],
   output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist")
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
@@ -28,21 +28,21 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             presets: [
               [
-                "@babel/preset-env",
+                '@babel/preset-env',
                 {
                   targets: {
-                    ie: "11"
-                  }
-                }
-              ]
-            ]
-          }
-        }
-      }
-    ]
-  }
-};
+                    ie: '11',
+                  },
+                },
+              ],
+            ],
+          },
+        },
+      },
+    ],
+  },
+}
