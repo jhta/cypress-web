@@ -15,5 +15,3 @@ node_modules/
 # VSCode workspace
 *.code-workspace
 .vscode/
-
-build
