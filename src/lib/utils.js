@@ -10,5 +10,5 @@ export function keyPressedIsCommaOrEnter(keyCode) {
 
 export function isValidEmail(email) {
   if (!email) return false
-  return email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
+  return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
 }
