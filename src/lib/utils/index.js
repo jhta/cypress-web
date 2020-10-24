@@ -1,4 +1,4 @@
-import { KEYCODE_ENTER, kEYCODE_COMMA } from './constants'
+import { KEYCODE_ENTER, kEYCODE_COMMA } from '../constants'
 
 export function isElement(element) {
   return element instanceof Element || element instanceof HTMLDocument

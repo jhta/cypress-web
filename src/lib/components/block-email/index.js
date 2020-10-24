@@ -1,4 +1,4 @@
-import { createUniqueBlockId } from './utils'
+import { createUniqueBlockId } from '../../utils'
 
 /**
  * @return {HTMLElement} close icon

@@ -1,4 +1,4 @@
-import createInput, { onKeyupFactory, onPasteFactory } from './input'
+import createInput, { onKeyupFactory, onPasteFactory } from '.'
 
 describe('Input', () => {
   const $input = createInput()

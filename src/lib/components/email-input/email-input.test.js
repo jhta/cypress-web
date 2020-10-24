@@ -1,5 +1,5 @@
-import EmailsInput from './email-input'
-import { createUniqueBlockId } from './utils'
+import EmailsInput from '.'
+import { createUniqueBlockId } from '../../utils'
 
 describe('EmailsInput', () => {
   describe('> Initial validations', () => {

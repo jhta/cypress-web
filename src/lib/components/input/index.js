@@ -1,5 +1,5 @@
-import { DEFAULT_PLACEHOLDER, kEYCODE_COMMA } from './constants'
-import { keyPressedIsCommaOrEnter } from './utils'
+import { DEFAULT_PLACEHOLDER, kEYCODE_COMMA } from '../../constants'
+import { keyPressedIsCommaOrEnter } from '../../utils'
 
 /**
  * onkeyup event handler factory

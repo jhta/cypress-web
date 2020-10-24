@@ -1,7 +1,7 @@
-import { isElement, isValidEmail, createUniqueBlockId } from './utils'
-import createInputElement from './input'
-import createBlockEmail from './block-email'
-import createWrapperElement from './wrapper'
+import { isElement, isValidEmail, createUniqueBlockId } from '../../utils'
+import createInputElement from '../input'
+import createBlockEmail from '../block-email'
+import createWrapperElement from '../wrapper'
 
 /**
  * @constructor

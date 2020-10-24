@@ -1,4 +1,4 @@
-import { keyPressedIsCommaOrEnter, isElement, isValidEmail } from './utils'
+import { keyPressedIsCommaOrEnter, isElement, isValidEmail } from '.'
 
 describe('Utills', () => {
   describe('> isElement', () => {
