@@ -4,8 +4,9 @@ import { keyPressedIsCommaOrEnter } from './utils'
 /**
  * onkeyup event handler factory
  * @param {Function} cb callback to execute
+ * @param {Function} reset callback to reset input value
  */
-export function onKeyupFactory(cb) {
+export function onKeyupFactory(cb, reset) {
   return event => {
     if (!keyPressedIsCommaOrEnter(event.keyCode)) return
     const {
@@ -15,14 +16,16 @@ export function onKeyupFactory(cb) {
     event.preventDefault()
     event.stopPropagation()
     cb(value)
+    reset()
   }
 }
 
 /**
  * onpaste event handler factory
  * @param {Function} cb callback to execute
+ * @param {Function} reset callback to reset input value
  */
-export function onPasteFactory(cb) {
+export function onPasteFactory(cb, reset) {
   return event => {
     event.preventDefault()
     event.stopPropagation()
@@ -30,6 +33,7 @@ export function onPasteFactory(cb) {
     const clipboardData = event.clipboardData || window.clipboardData
     const value = clipboardData.getData('text')
     cb(value)
+    reset()
   }
 }
 
@@ -51,10 +55,14 @@ function createInputElement(options = {}, events = {}) {
   $input.id = 'input'
   $input.classList.add('email-input--input')
 
-  const onKeyup = onKeyupFactory(keyup)
+  const reset = () => {
+    $input.value = ''
+  }
+
+  const onKeyup = onKeyupFactory(keyup, reset)
   $input.addEventListener('keyup', onKeyup)
 
-  const onPaste = onPasteFactory(paste)
+  const onPaste = onPasteFactory(paste, reset)
   $input.addEventListener('paste', onPaste)
 
   return $input

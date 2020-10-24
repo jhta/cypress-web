@@ -1,5 +1,4 @@
-import { DEFAULT_PLACEHOLDER } from './constants'
-import { isElement, isValidEmail, keyPressedIsCommaOrEnter } from './utils'
+import { isElement, isValidEmail } from './utils'
 import createInputElement from './input'
 
 function EmailInputs($el, options) {
@@ -7,7 +6,14 @@ function EmailInputs($el, options) {
   if (!isElement($el)) throw new Error('Container $el is not a DOM element')
   this.emails = {}
 
-  this.$input = createInputElement(options)
+  this.$input = createInputElement(options, {
+    keyup: value => {
+      this.addEmail(value)
+    },
+    paste: value => {
+      console.log('on paste', value)
+    },
+  })
   $el.appendChild(this.$input)
   this.$el = $el
 }
@@ -18,8 +24,8 @@ EmailInputs.prototype.getElement = function() {
 
 EmailInputs.prototype.addEmail = function(email) {
   const emailObj = { email, valid: isValidEmail(email) }
+  console.log('emai added', email)
   this.emails[email] = emailObj
-  this.insertEmailBockElement(emailObj)
 }
 
 function emailInputFactory($el, options) {

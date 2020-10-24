@@ -20,23 +20,29 @@ describe('Input', () => {
 
   describe('> Event factories', () => {
     describe('onKeyupFactory', () => {
+      const cb = jest.fn()
+      const reset = jest.fn()
+      const onKeyup = onKeyupFactory(cb, reset)
+      const eventKeyup = {
+        keyCode: 13,
+        target: { value: 'hello,' },
+        preventDefault: jest.fn(),
+        stopPropagation: jest.fn(),
+      }
+      onKeyup(eventKeyup)
       it('should call the callback if the key pressed is comma or enter', () => {
-        const cb = jest.fn()
-        const onKeyup = onKeyupFactory(cb)
-        const eventKeyup = {
-          keyCode: 13,
-          target: { value: 'hello,' },
-          preventDefault: jest.fn(),
-          stopPropagation: jest.fn(),
-        }
-        onKeyup(eventKeyup)
         expect(cb).toHaveBeenCalledWith('hello,')
+      })
+
+      it('shoud call the reset method', () => {
+        expect(reset).toHaveBeenCalled()
       })
     })
 
     describe('onPasteFactory', () => {
       it('should call the callback if the key pressed is comma or enter', () => {
         const cb = jest.fn()
+        const reset = jest.fn()
 
         const onPaste = onPasteFactory(cb)
         const event = {
