@@ -33,20 +33,6 @@ describe('EmailsInput', () => {
       it('Should insert a input element to the container $el', () => {
         expect($input.tagName).toBe('INPUT')
       })
-
-      it('Shoud have element id=input', () => {
-        expect($input.id).toBe('input')
-      })
-
-      it('Should use the placeholder set in the options param', () => {
-        const $elWithPlaceholder = document.createElement('div')
-        const $emailsInputWIthPlacehoder = EmailsInput($elWithPlaceholder, {
-          placeholder: 'PLACEHOLDER TEST',
-        }).getElement()
-        expect($emailsInputWIthPlacehoder.lastChild.placeholder).toBe(
-          'PLACEHOLDER TEST'
-        )
-      })
     })
   })
 })

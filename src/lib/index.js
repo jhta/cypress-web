@@ -1,29 +1,6 @@
 import { DEFAULT_PLACEHOLDER } from './constants'
 import { isElement, isValidEmail, keyPressedIsCommaOrEnter } from './utils'
-
-function createInputElement(options, addEmail) {
-  const $input = document.createElement('input')
-
-  const placeholder = (options && options.placeholder) || DEFAULT_PLACEHOLDER
-  $input.placeholder = placeholder
-  $input['data-test'] = 'input'
-  $input.id = 'input'
-
-  $input.classList.add('email-input--input')
-
-  $input.addEventListener('keyup', event => {
-    if (!keyPressedIsCommaOrEnter(event.keyCode)) return
-    const {
-      target: { value },
-    } = event
-
-    event.preventDefault()
-    event.stopPropagation()
-    addEmail(value)
-  })
-
-  return $input
-}
+import createInputElement from './input'
 
 function EmailInputs($el, options) {
   if (typeof $el === 'undefined') throw new Error('Argument $el is required')
