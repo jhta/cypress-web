@@ -45,6 +45,9 @@ EmailInput.prototype.createInputHandlers = function() {
     paste: value => {
       this.addEmailsFromPaste(value)
     },
+    blur: value => {
+      this.addEmail(value)
+    },
   }
 }
 

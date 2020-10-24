@@ -1,4 +1,4 @@
-import createInput, { onKeyupFactory, onPasteFactory } from '.'
+import createInput, { onKeyupFactory, onPasteFactory, onBlurFactory } from '.'
 
 describe('Input', () => {
   const $input = createInput()
@@ -53,6 +53,25 @@ describe('Input', () => {
       onPaste(event)
       it('should call the callback if the key pressed is comma or enter', () => {
         expect(cb).toHaveBeenCalledWith('clipboard_text')
+      })
+
+      it('shoud call the reset method', () => {
+        expect(reset).toHaveBeenCalled()
+      })
+    })
+
+    describe('onBlurFactoy', () => {
+      const cb = jest.fn()
+      const reset = jest.fn()
+      const onBlur = onBlurFactory(cb, reset)
+      const event = {
+        target: { value: 'phrase' },
+        preventDefault: jest.fn(),
+        stopPropagation: jest.fn(),
+      }
+      onBlur(event)
+      it('should call the callback with the event target value', () => {
+        expect(cb).toHaveBeenCalledWith(event.target.value)
       })
 
       it('shoud call the reset method', () => {

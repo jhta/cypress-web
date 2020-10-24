@@ -42,6 +42,25 @@ export function onPasteFactory(cb, reset) {
 }
 
 /**
+ * onpaste event handler factory
+ * @param {Function} cb callback to execute
+ * @param {Function} reset callback to reset input value
+ */
+export function onBlurFactory(cb, reset) {
+  return event => {
+    event.preventDefault()
+    event.stopPropagation()
+
+    const {
+      target: { value },
+    } = event
+
+    cb(value)
+    reset()
+  }
+}
+
+/**
  *
  * @param {String} params.placeholder
  * @param {Object} events
@@ -53,7 +72,7 @@ function createInputElement(
   { placeholder = DEFAULT_PLACEHOLDER } = {},
   events = {}
 ) {
-  const { keyup, paste } = events
+  const { keyup, paste, blur } = events
   const $input = document.createElement('input')
   $input.placeholder = placeholder
   $input['data-test'] = 'input'
@@ -69,6 +88,9 @@ function createInputElement(
 
   const onPaste = onPasteFactory(paste, reset)
   $input.addEventListener('paste', onPaste)
+
+  const onBlur = onBlurFactory(blur, reset)
+  $input.addEventListener('blur', onBlur)
 
   return $input
 }
