@@ -1,4 +1,4 @@
-import './style.css'
+import './style.less'
 function hello() {
   console.log('hello world')
 }
