@@ -1,5 +1,6 @@
 import { isElement, isValidEmail } from './utils'
 import createInputElement from './input'
+import createBlockEmail from './block-email'
 
 export default function EmailInput($el, options) {
   if (typeof $el === 'undefined') throw new Error('Argument $el is required')
@@ -31,17 +32,6 @@ EmailInput.prototype.addEmail = function(email) {
 }
 
 EmailInput.prototype.insertBlockEmail = function({ email, valid }) {
-  const classNameValid = valid ? 'valid' : 'invalid'
-  const $blockEmail = document.createElement('p')
-  $blockEmail.classList.add('email-block')
-  $blockEmail.classList.add(classNameValid)
-
-  const $text = document.createTextNode(email)
-  const $closeIcon = document.createElement('span')
-  $closeIcon.innerHTML = '&times'
-  $closeIcon.classList.add('i-close')
-  $blockEmail.appendChild($text)
-  $blockEmail.appendChild($closeIcon)
-
+  const $blockEmail = createBlockEmail({ email, valid })
   this.$el.appendChild($blockEmail)
 }
