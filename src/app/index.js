@@ -1,6 +1,10 @@
 import './style.less'
-function hello() {
-  console.log('hello world')
+import EmailsInput from '../lib'
+
+function init() {
+  const inputContainerNode = document.querySelector('#emails-input')
+  const emailsInput = EmailInputs(inputContainerNode)
+  console.log(emailsInput)
 }
 
-hello()
+init()
