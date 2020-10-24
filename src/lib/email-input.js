@@ -13,7 +13,7 @@ export default function EmailInput($el, options) {
       this.addEmail(value)
     },
     paste: value => {
-      console.log('on paste', value)
+      this.addEmailsFromPaste(value)
     },
   })
 
@@ -46,4 +46,11 @@ EmailInput.prototype.addEmail = function(email) {
 EmailInput.prototype.insertBlockEmail = function({ email, valid }) {
   const $blockEmail = createBlockEmail({ email, valid })
   this.$blockElements.appendChild($blockEmail)
+}
+
+EmailInput.prototype.addEmailsFromPaste = function(text) {
+  if (!text) return
+
+  const emails = text.split(',')
+  emails.forEach(email => this.addEmail(email))
 }

@@ -19,7 +19,7 @@ describe('EmailsInput', () => {
     })
   })
 
-  describe(' > getElement', () => {
+  describe(' > getElement()', () => {
     const $el = document.createElement('div')
     const $emailsInput = new EmailsInput($el)
 
@@ -36,7 +36,7 @@ describe('EmailsInput', () => {
     })
   })
 
-  describe(' > addEmail', () => {
+  describe(' > addEmail()', () => {
     describe('if receive email as argument', () => {
       it('Should add email object = { email, valid } to this.emails Map with email as key ', () => {
         const $el = document.createElement('div')
@@ -58,6 +58,43 @@ describe('EmailsInput', () => {
 
         spy.mockRestore()
       })
+    })
+  })
+
+  describe(' > addEmailsFromPaste()', () => {
+    const copyPasteEmailsMock = 'exampe@emai.com,anotheremail@email.co,bademail'
+
+    const copyPasteEmailsMockFormatted = [
+      'exampe@emai.com',
+      'anotheremail@email.co',
+      'bademail',
+    ]
+
+    it('should split the text to get the emails, and call `this.addEmail` the emails number times', () => {
+      const $el = document.createElement('div')
+      const $emailsInput = new EmailsInput($el)
+
+      const spy = jest.spyOn($emailsInput, 'addEmail')
+
+      $emailsInput.addEmailsFromPaste(copyPasteEmailsMock)
+      expect(spy).toHaveBeenCalledTimes(copyPasteEmailsMockFormatted.length)
+
+      spy.mockRestore()
+    })
+
+    it('should call `this.add` with the `email` and `valid` arguments', () => {
+      const $el = document.createElement('div')
+      const $emailsInput = new EmailsInput($el)
+
+      const spy = jest.spyOn($emailsInput, 'addEmail')
+
+      $emailsInput.addEmailsFromPaste(copyPasteEmailsMock)
+
+      expect(spy).toHaveBeenCalledWith(copyPasteEmailsMockFormatted[0])
+      expect(spy).toHaveBeenCalledWith(copyPasteEmailsMockFormatted[1])
+      expect(spy).toHaveBeenCalledWith(copyPasteEmailsMockFormatted[2])
+
+      spy.mockRestore()
     })
   })
 })
