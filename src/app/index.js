@@ -3,7 +3,7 @@ import EmailsInput from '../lib'
 
 function init() {
   const inputContainerNode = document.querySelector('#emails-input')
-  const emailsInput = EmailInputs(inputContainerNode)
+  const emailsInput = EmailsInput(inputContainerNode)
   console.log(emailsInput)
 }
 
