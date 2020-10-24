@@ -11,7 +11,8 @@ function emailInputFactory($el, options) {
   return {
     getElement: () => emailInput.getElement(),
     addEmail: email => emailInput.addEmail(email),
-    countEmails: () => Object.keys(emailInput.emails).length,
+    countValidEmails: () =>
+      Object.values(emailInput.emails).filter(({ valid }) => valid).length,
   }
 }
 

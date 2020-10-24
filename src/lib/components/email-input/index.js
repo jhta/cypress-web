@@ -61,6 +61,11 @@ EmailInput.prototype.getElement = function() {
 EmailInput.prototype.addEmail = function(email) {
   if (!email) return
 
+  if (this.emails[email]) {
+    alert(`Email ${email} is already added`)
+    return
+  }
+
   const emailObj = { email, valid: isValidEmail(email) }
   this.emails[email] = emailObj
   this.insertBlockEmail(emailObj)
