@@ -12,3 +12,13 @@ export function isValidEmail(email) {
   if (!email) return false
   return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
 }
+
+/**
+ *
+ * @param {String} containerId
+ * @param {String} email
+ * @return {String} "unique id" based on the email and container id
+ */
+export function createUniqueBlockId(containerId, email) {
+  return `block-email-${containerId}-${email}`
+}

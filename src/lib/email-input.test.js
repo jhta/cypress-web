@@ -1,4 +1,5 @@
 import EmailsInput from './email-input'
+import { createUniqueBlockId } from './utils'
 
 describe('EmailsInput', () => {
   describe('> Initial validations', () => {
@@ -101,28 +102,27 @@ describe('EmailsInput', () => {
   describe('> removeBlockEmail()', () => {
     it('should remove the block email from the DOM if element with id=`block-email-{args.email}` exists', () => {
       const $el = document.createElement('div')
+      $el.id = 'email-input'
       document.body.appendChild($el)
       const $emailsInput = new EmailsInput($el)
       const email = 'emaito@remove.co'
 
+      const id = createUniqueBlockId($el.id, email)
       // insert email to remove
       $emailsInput.addEmail(email)
-      const blockIsPresent = Boolean(
-        document.getElementById(`block-email-${email}`)
-      )
+      const blockIsPresent = Boolean(document.getElementById(id))
 
       expect(blockIsPresent).toBeTruthy()
 
       $emailsInput.removeBlockEmail(email)
-      const blockIsPresentAfterDelete = Boolean(
-        document.getElementById(`block-email-${email}`)
-      )
+      const blockIsPresentAfterDelete = Boolean(document.getElementById(id))
 
       expect(blockIsPresentAfterDelete).toBeFalsy()
     })
 
     it('should remove email from this.emails if it exist there', () => {
       const $el = document.createElement('div')
+      $el.id = 'email-input'
       document.body.appendChild($el)
       const $emailsInput = new EmailsInput($el)
       const email = 'emaito@remove.co'

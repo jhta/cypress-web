@@ -1,4 +1,4 @@
-import { isElement, isValidEmail } from './utils'
+import { isElement, isValidEmail, createUniqueBlockId } from './utils'
 import createInputElement from './input'
 import createBlockEmail from './block-email'
 import createWrapperElement from './wrapper'
@@ -35,6 +35,7 @@ export default function EmailInput($el, options) {
   $el.appendChild($wrapper)
   this.$blockElements = $blockElements
   this.$el = $el
+  this.id = $el.id
 }
 
 EmailInput.prototype.getElement = function() {
@@ -59,7 +60,7 @@ EmailInput.prototype.addEmail = function(email) {
  */
 EmailInput.prototype.insertBlockEmail = function({ email, valid }) {
   const $blockEmail = createBlockEmail(
-    { email, valid },
+    { email, valid, containerId: this.id },
     {
       close: value => {
         console.log('to remove', value)
@@ -77,7 +78,8 @@ EmailInput.prototype.insertBlockEmail = function({ email, valid }) {
 EmailInput.prototype.removeBlockEmail = function(email) {
   if (!email) return
 
-  const $blockEmail = document.getElementById(`block-email-${email}`)
+  const id = createUniqueBlockId(this.id, email)
+  const $blockEmail = document.getElementById(id)
 
   if (!$blockEmail || !$blockEmail.parentNode) return
 
