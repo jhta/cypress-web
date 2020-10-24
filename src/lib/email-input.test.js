@@ -19,7 +19,7 @@ describe('EmailsInput', () => {
     })
   })
 
-  describe(' > getElement()', () => {
+  describe('> getElement()', () => {
     const $el = document.createElement('div')
     const $emailsInput = new EmailsInput($el)
 
@@ -36,7 +36,7 @@ describe('EmailsInput', () => {
     })
   })
 
-  describe(' > addEmail()', () => {
+  describe('> addEmail()', () => {
     describe('if receive email as argument', () => {
       it('Should add email object = { email, valid } to this.emails Map with email as key ', () => {
         const $el = document.createElement('div')
@@ -61,7 +61,7 @@ describe('EmailsInput', () => {
     })
   })
 
-  describe(' > addEmailsFromPaste()', () => {
+  describe('> addEmailsFromPaste()', () => {
     const copyPasteEmailsMock = 'exampe@emai.com,anotheremail@email.co,bademail'
 
     const copyPasteEmailsMockFormatted = [
@@ -95,6 +95,48 @@ describe('EmailsInput', () => {
       expect(spy).toHaveBeenCalledWith(copyPasteEmailsMockFormatted[2])
 
       spy.mockRestore()
+    })
+  })
+
+  describe('> removeBlockEmail()', () => {
+    it('should remove the block email from the DOM if element with id=`block-email-{args.email}` exists', () => {
+      const $el = document.createElement('div')
+      document.body.appendChild($el)
+      const $emailsInput = new EmailsInput($el)
+      const email = 'emaito@remove.co'
+
+      // insert email to remove
+      $emailsInput.addEmail(email)
+      const blockIsPresent = Boolean(
+        document.getElementById(`block-email-${email}`)
+      )
+
+      expect(blockIsPresent).toBeTruthy()
+
+      $emailsInput.removeBlockEmail(email)
+      const blockIsPresentAfterDelete = Boolean(
+        document.getElementById(`block-email-${email}`)
+      )
+
+      expect(blockIsPresentAfterDelete).toBeFalsy()
+    })
+
+    it('should remove email from this.emails if it exist there', () => {
+      const $el = document.createElement('div')
+      document.body.appendChild($el)
+      const $emailsInput = new EmailsInput($el)
+      const email = 'emaito@remove.co'
+
+      // insert email to remove
+      $emailsInput.addEmail(email)
+
+      const hasEmail = $emailsInput.emails.hasOwnProperty(email)
+      expect(hasEmail).toBeTruthy()
+
+      $emailsInput.removeBlockEmail(email)
+      const hasEmailAfterRemove = $emailsInput.emails.hasOwnProperty(email)
+
+      expect(hasEmailAfterRemove).toBeFalsy()
     })
   })
 })

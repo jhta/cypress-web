@@ -3,6 +3,12 @@ import createInputElement from './input'
 import createBlockEmail from './block-email'
 import createWrapperElement from './wrapper'
 
+/**
+ * @constructor
+ * @param {HTMLElement} $el
+ * @param {Object} options
+ * @param {String} options.placeholder Input placeHolder
+ */
 export default function EmailInput($el, options) {
   if (typeof $el === 'undefined') throw new Error('Argument $el is required')
   if (!isElement($el)) throw new Error('Container $el is not a DOM element')
@@ -35,6 +41,9 @@ EmailInput.prototype.getElement = function() {
   return this.$el
 }
 
+/**
+ * @param {String} email
+ */
 EmailInput.prototype.addEmail = function(email) {
   if (!email) return
 
@@ -43,11 +52,44 @@ EmailInput.prototype.addEmail = function(email) {
   this.insertBlockEmail(emailObj)
 }
 
+/**
+ *
+ * @param {String} params.email
+ * @param {Boolean} params.vaid
+ */
 EmailInput.prototype.insertBlockEmail = function({ email, valid }) {
-  const $blockEmail = createBlockEmail({ email, valid })
+  const $blockEmail = createBlockEmail(
+    { email, valid },
+    {
+      close: value => {
+        console.log('to remove', value)
+        this.removeBlockEmail(value)
+      },
+    }
+  )
   this.$blockElements.appendChild($blockEmail)
 }
 
+/**
+ *
+ * @param {String} email
+ */
+EmailInput.prototype.removeBlockEmail = function(email) {
+  if (!email) return
+
+  const $blockEmail = document.getElementById(`block-email-${email}`)
+
+  if (!$blockEmail || !$blockEmail.parentNode) return
+
+  $blockEmail.parentNode.removeChild($blockEmail)
+
+  delete this.emails[email]
+}
+
+/**
+ *
+ * @param {String} text
+ */
 EmailInput.prototype.addEmailsFromPaste = function(text) {
   if (!text) return
 
