@@ -4,6 +4,7 @@ import EmailInput from './components/email-input'
  * EmailInput factory created in order to encapsulate EmailInput properties.
  * @param {HTMLElement} $el
  * @param {Object} options
+ * @param {String} options.placeholder
  */
 function emailInputFactory($el, options) {
   const emailInput = new EmailInput($el, options)
