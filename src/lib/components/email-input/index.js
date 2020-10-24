@@ -4,8 +4,9 @@ import createBlockEmail from '../block-email'
 import createWrapperElement from '../wrapper'
 
 /**
+ * EmailInput class component
  * @constructor
- * @param {HTMLElement} $el
+ * @param {HTMLElement} $el Element to insert the input
  * @param {Object} options
  * @param {String} options.placeholder Input placeHolder
  */
@@ -14,28 +15,37 @@ export default function EmailInput($el, options) {
   if (!isElement($el)) throw new Error('Container $el is not a DOM element')
   this.emails = {}
 
-  this.$input = createInputElement(options, {
+  const inputEvents = this.createInputHandlers()
+  const $input = createInputElement(options, inputEvents)
+
+  const onClickWrapper = () => {
+    $input.focus()
+  }
+
+  const $blockElements = document.createElement('span')
+
+  const $wrapper = createWrapperElement({}, { click: onClickWrapper })
+  $wrapper.appendChild($blockElements)
+  $wrapper.appendChild($input)
+  $el.appendChild($wrapper)
+
+  this.$blockElements = $blockElements
+  this.$el = $el
+  this.id = $el.id
+}
+
+/**
+ * Get initial handlers for input with class context scoped
+ */
+EmailInput.prototype.createInputHandlers = function() {
+  return {
     keyup: value => {
       this.addEmail(value)
     },
     paste: value => {
       this.addEmailsFromPaste(value)
     },
-  })
-
-  const onClickWrapper = () => {
-    this.$input.focus()
   }
-
-  const $wrapper = createWrapperElement({}, { click: onClickWrapper })
-  const $blockElements = document.createElement('span')
-
-  $wrapper.appendChild($blockElements)
-  $wrapper.appendChild(this.$input)
-  $el.appendChild($wrapper)
-  this.$blockElements = $blockElements
-  this.$el = $el
-  this.id = $el.id
 }
 
 EmailInput.prototype.getElement = function() {

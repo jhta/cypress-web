@@ -43,15 +43,16 @@ export function onPasteFactory(cb, reset) {
 
 /**
  *
- * @param {Object} options
- * @param {String} options.placeholder
+ * @param {String} params.placeholder
  * @param {Object} events
  * @param {Function} events.keyup
  * @param {Function} events.paste
  * @return {HTMLDocument}
  */
-function createInputElement(options = {}, events = {}) {
-  const { placeholder = DEFAULT_PLACEHOLDER } = options
+function createInputElement(
+  { placeholder = DEFAULT_PLACEHOLDER } = {},
+  events = {}
+) {
   const { keyup, paste } = events
   const $input = document.createElement('input')
   $input.placeholder = placeholder

@@ -1,24 +1,5 @@
 import { createUniqueBlockId } from '../../utils'
-
-/**
- * @return {HTMLElement} close icon
- */
-function createIconCloseElement({ email, containerId }, events) {
-  const { close } = events
-  const $closeIcon = document.createElement('span')
-  $closeIcon.innerHTML = '&times'
-  $closeIcon.classList.add('i-close')
-  $closeIcon['data-email'] = email
-  $closeIcon['data-test'] = createUniqueBlockId(containerId, email)
-
-  $closeIcon.addEventListener('click', event => {
-    event.stopPropagation()
-    event.preventDefault()
-
-    close(email)
-  })
-  return $closeIcon
-}
+import createCloseIconElement from '../close-icon'
 
 /**
  *
@@ -27,8 +8,13 @@ function createIconCloseElement({ email, containerId }, events) {
  * @param {Valid} emailObj.valid
  * @return {HTMLElement} block email
  */
-function createBlockEmailElement({ email, valid, containerId } = {}, events) {
-  if (!email) return
+function createBlockEmailElement(
+  { email, valid, containerId } = {},
+  events = {}
+) {
+  if (!email) throw new Error('`email` is required to create email block')
+  if (!containerId)
+    throw new Error('`containerId` is required to create email block')
 
   const { close } = events
   const classNameValid = valid ? 'valid' : 'invalid'
@@ -41,7 +27,7 @@ function createBlockEmailElement({ email, valid, containerId } = {}, events) {
   $blockEmail.classList.add(classNameValid)
 
   const $text = document.createTextNode(email)
-  const $closeIcon = createIconCloseElement({ email, containerId }, { close })
+  const $closeIcon = createCloseIconElement({ email, containerId }, { close })
   $blockEmail.appendChild($text)
   $blockEmail.appendChild($closeIcon)
 

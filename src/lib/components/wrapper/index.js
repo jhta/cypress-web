@@ -12,7 +12,6 @@ function createWrapperElement(_, events = {}) {
 
   $wrapper.addEventListener('click', event => {
     event.preventDefault()
-    console.log('click')
     click()
   })
 
