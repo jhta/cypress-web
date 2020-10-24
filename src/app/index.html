@@ -4,8 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1>Hello world</h1>
+    <div id="email-input-form" class="form">
+      <div class="form--group">
+        <p class="form--label">Share <b>Board name </b>with others</p>
+        <div id="emai-input" class="email-input">
+          <p class="email-block success"
+            >benito@camelas.com <span class="i-close">&times</span></p
+          >
+          <p class="email-block success"
+            >benito@camelas.com <span class="i-close">&times</span></p
+          >
+          <p class="email-block error"
+            >benito@camelas.com <span class="i-close">&times</span></p
+          >
+        </div>
+      </div>
+      <div class="form--buttons">
+        <button class="button" id="button-add">Add email</button>
+        <button class="button" id="button-count">Get emails count</button>
+      </div>
+    </div>
   </body>
 </html>
