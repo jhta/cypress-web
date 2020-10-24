@@ -40,18 +40,23 @@ describe('Input', () => {
     })
 
     describe('onPasteFactory', () => {
-      it('should call the callback if the key pressed is comma or enter', () => {
-        const cb = jest.fn()
-        const reset = jest.fn()
+      const cb = jest.fn()
+      const reset = jest.fn()
 
-        const onPaste = onPasteFactory(cb)
-        const event = {
-          clipboardData: { getData: () => 'clipboard_text' },
-          preventDefault: jest.fn(),
-          stopPropagation: jest.fn(),
-        }
-        onPaste(event)
+      const onPaste = onPasteFactory(cb, reset)
+      const event = {
+        clipboardData: { getData: () => 'clipboard_text' },
+        preventDefault: jest.fn(),
+        stopPropagation: jest.fn(),
+      }
+
+      onPaste(event)
+      it('should call the callback if the key pressed is comma or enter', () => {
         expect(cb).toHaveBeenCalledWith('clipboard_text')
+      })
+
+      it('shoud call the reset method', () => {
+        expect(reset).toHaveBeenCalled()
       })
     })
   })
