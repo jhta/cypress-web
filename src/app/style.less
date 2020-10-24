@@ -1,41 +1,60 @@
+@white-color: white;
+@black-color: #050038;
 @gray-color: #f8f8f7;
 @gray-dark-color: #c3c2cf;
 @error-color: #d92929;
 @email-bg-color: rgba(102, 153, 255, 0.2);
+@button-bg-color: #4262ff;
 
 body {
   background: #ccc;
   font-family: 'Open Sans', sans-serif;
 }
 
-.email-input--container {
-  margin: 6rem;
-  background: #fff;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  display: inline-block;
-}
+.email-input {
+  background: @white-color;
+  border: 1px solid @gray-dark-color;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 440px;
+  min-height: 96px;
+  padding: 8px;
 
-.email-input--group {
-  background: @gray-color;
-  padding: 24px 50px;
-  border-radius: 8px;
-}
+  &--label {
+    font-size: 20px;
+    line-height: 27px;
+    color: @black-color;
+  }
 
-.email-input--buttons {
-  padding: 24px 50px;
-  border-radius: 8px;
+  &--container {
+    margin: 6rem;
+    background: #fff;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  &--group {
+    background: @gray-color;
+    padding: 24px 50px;
+    border-radius: 8px;
+  }
+
+  &--buttons {
+    padding: 24px 50px;
+    border-radius: 8px;
+  }
 }
 
 .button {
   font-family: 'Open Sans', sans-serif;
-  background: #4262ff;
+  background: @button-bg-color;
   border: none;
   border-radius: 6px;
   font-size: 14px;
   line-height: 24px;
   text-align: center;
-  color: white;
+  color: @white-color;
   padding: 8px 16px;
   cursor: pointer;
   -webkit-appearance: button;
@@ -44,30 +63,14 @@ body {
   -moz-appearance: none;
   outline: none;
   margin-right: 16px;
-}
 
-.button:active {
-  transform: scale(0.95);
-}
+  &:active {
+    transform: scale(0.95);
+  }
 
-.button:last-child {
-  margin-right: 0;
-}
-
-.email-input--label {
-  font-size: 20px;
-  line-height: 27px;
-  color: #050038;
-}
-
-.email-input {
-  background: #ffffff;
-  border: 1px solid @gray-dark-color;
-  box-sizing: border-box;
-  border-radius: 4px;
-  width: 440px;
-  min-height: 96px;
-  padding: 8px;
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 .email-block {
@@ -80,15 +83,15 @@ body {
   padding-right: 24px;
   font-size: 14px;
   line-height: 24px;
-}
 
-.success {
-  border-radius: 100px;
-  background: @email-bg-color;
-}
+  &.correct {
+    border-radius: 100px;
+    background: @email-bg-color;
+  }
 
-.error {
-  border-bottom: dashed @error-color 1px;
+  &.error {
+    border-bottom: dashed @error-color 1px;
+  }
 }
 
 .i-close {
@@ -99,8 +102,8 @@ body {
   line-height: 16px;
   padding: 4px 8px;
   cursor: pointer;
-}
 
-.i-close:active {
-  transform: scale(0.95);
+  &:active {
+    transform: scale(0.95);
+  }
 }
