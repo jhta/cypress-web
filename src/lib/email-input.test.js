@@ -28,7 +28,7 @@ describe('EmailsInput', () => {
     })
 
     describe('> Input', () => {
-      const $input = $emailsInput.getElement().lastChild
+      const $input = $emailsInput.$input
 
       it('Should insert a input element to the container $el', () => {
         expect($input.tagName).toBe('INPUT')

@@ -1,4 +1,4 @@
-import { DEFAULT_PLACEHOLDER } from './constants'
+import { DEFAULT_PLACEHOLDER, kEYCODE_COMMA } from './constants'
 import { keyPressedIsCommaOrEnter } from './utils'
 
 /**
@@ -8,14 +8,18 @@ import { keyPressedIsCommaOrEnter } from './utils'
  */
 export function onKeyupFactory(cb, reset) {
   return event => {
-    if (!keyPressedIsCommaOrEnter(event.keyCode)) return
     const {
       target: { value },
+      keyCode,
     } = event
+    if (!keyPressedIsCommaOrEnter(keyCode)) return
+
+    const valueWithoutComma =
+      keyCode === kEYCODE_COMMA ? value.slice(0, -1) : value
 
     event.preventDefault()
     event.stopPropagation()
-    cb(value)
+    cb(valueWithoutComma)
     reset()
   }
 }

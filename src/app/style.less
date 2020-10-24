@@ -30,7 +30,19 @@ body {
   border-radius: 4px;
   width: 440px;
   min-height: 96px;
-  padding: 8px;
+  position: relative;
+
+  &--wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 8px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    left: 0;
+    top: 0;
+    cursor: text;
+  }
 
   &--label {
     font-size: 20px;

@@ -1,6 +1,7 @@
 import { isElement, isValidEmail } from './utils'
 import createInputElement from './input'
 import createBlockEmail from './block-email'
+import createWrapperElement from './wrapper'
 
 export default function EmailInput($el, options) {
   if (typeof $el === 'undefined') throw new Error('Argument $el is required')
@@ -15,7 +16,18 @@ export default function EmailInput($el, options) {
       console.log('on paste', value)
     },
   })
-  $el.appendChild(this.$input)
+
+  const onClickWrapper = () => {
+    this.$input.focus()
+  }
+
+  const $wrapper = createWrapperElement({}, { click: onClickWrapper })
+  const $blockElements = document.createElement('span')
+
+  $wrapper.appendChild($blockElements)
+  $wrapper.appendChild(this.$input)
+  $el.appendChild($wrapper)
+  this.$blockElements = $blockElements
   this.$el = $el
 }
 
@@ -33,5 +45,5 @@ EmailInput.prototype.addEmail = function(email) {
 
 EmailInput.prototype.insertBlockEmail = function({ email, valid }) {
   const $blockEmail = createBlockEmail({ email, valid })
-  this.$el.appendChild($blockEmail)
+  this.$blockElements.appendChild($blockEmail)
 }
