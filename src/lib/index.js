@@ -1,16 +1,7 @@
-const DEFAULT_PLACEHOLDER = 'add more people..'
-const KEYCODE_ENTER = 13
-const kEYCODE_COMMA = 188
+import { DEFAULT_PLACEHOLDER } from './constants'
+import { isElement, isValidEmail, keyPressedIsCommaOrEnter } from './utils'
 
-function isElement(element) {
-  return element instanceof Element || element instanceof HTMLDocument
-}
-
-function keyPressedIsCommaOrEnter(keyCode) {
-  return keyCode === KEYCODE_ENTER || keyCode === kEYCODE_COMMA
-}
-
-function createInput(options) {
+function createInputElement(options, addEmail) {
   const $input = document.createElement('input')
 
   const placeholder = (options && options.placeholder) || DEFAULT_PLACEHOLDER
@@ -28,7 +19,7 @@ function createInput(options) {
 
     event.preventDefault()
     event.stopPropagation()
-    console.log('email', value)
+    addEmail(value)
   })
 
   return $input
@@ -37,14 +28,21 @@ function createInput(options) {
 function EmailInputs($el, options) {
   if (typeof $el === 'undefined') throw new Error('Argument $el is required')
   if (!isElement($el)) throw new Error('Container $el is not a DOM element')
+  this.emails = {}
 
-  this.$input = createInput(options)
+  this.$input = createInputElement(options)
   $el.appendChild(this.$input)
   this.$el = $el
 }
 
 EmailInputs.prototype.getElement = function() {
   return this.$el
+}
+
+EmailInputs.prototype.addEmail = function(email) {
+  const emailObj = { email, valid: isValidEmail(email) }
+  this.emails[email] = emailObj
+  this.insertEmailBockElement(emailObj)
 }
 
 function emailInputFactory($el, options) {
