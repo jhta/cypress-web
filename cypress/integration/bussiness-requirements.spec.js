@@ -2,7 +2,7 @@
 
 context('Bussiness requirements', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8080')
+    cy.visit('http://jhta.github.io/miro')
   })
 
   it('Should add email pressing ENTER', () => {

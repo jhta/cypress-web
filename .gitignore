@@ -15,3 +15,7 @@ node_modules/
 # VSCode workspace
 *.code-workspace
 .vscode/
+
+cypress/plugins
+cypress/fixtures
+cypress/support
