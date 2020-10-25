@@ -1,6 +1,7 @@
 [![test/deploy](https://github.com/jhta/miro/workflows/deploy/badge.svg)](https://github.com/jhta/miro/actions)
-
 [![e2e](https://github.com/jhta/miro/workflows/e2e/badge.svg)](https://github.com/jhta/miro/actions)
+![coverage](https://github.com/jhta/miro/blob/main/coverage/badge-statements.svg)
+![coverage](https://github.com/jhta/miro/blob/main/coverage/badge-lines.svg)
 
 
 # Miro Test Assignment
@@ -74,10 +75,20 @@ yarn dev #or npm run dev
 yarn build
 ```
 
-### Run test
+### Run Unit testing
 
 ```bash
 yarn test
+```
+
+## run test coverage
+```bash
+yarn test:coverage
+```
+
+## run test automation
+```bash
+yarn test:e2e
 ```
 
 ### Run test watch
@@ -95,6 +106,8 @@ yarn lint
 ## Folder Structure
 
 - `/build` static web build
+- `/coverage` Test coverage report
+- `/cypress` Cypress automation tests
 - `/src` code
   - `/app/` App to DEMO, it includes the main `index.html`, `index.js`, `app.test.js`, and `style.less`
   - `/src/lib/` Email input as exportable library
