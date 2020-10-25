@@ -36,13 +36,13 @@ context('Bussiness requirements', () => {
   })
 
   it('Should add a random email clicking `Add Email` button', () => {
-    const randomEmail1 = 'email1@miro.com'
     cy.get('#button-add').click()
 
     cy.wait(200)
 
-    cy.get(`[data-test="${randomEmail1}"]`)
-      .should('contain.text', randomEmail1)
+    cy.get('.email-block')
+      .first()
+      .should('contain.text', 'email1@miro.com')
       .should('have.class', 'valid')
   })
 
