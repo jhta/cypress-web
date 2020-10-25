@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
   mode: 'production',
   entry: {
-    app: './src/app/index.js',
+    app: ['core-js/stable', './src/app/index.js'],
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
@@ -30,6 +30,11 @@ module.exports = {
               [
                 '@babel/preset-env',
                 {
+                  corejs: {
+                    version: '3',
+                    proposals: true,
+                  },
+                  useBuiltIns: 'usage',
                   targets: {
                     ie: '11',
                   },
