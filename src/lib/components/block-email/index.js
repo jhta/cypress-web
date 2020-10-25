@@ -20,7 +20,7 @@ function createBlockEmailElement(
   const classNameValid = valid ? 'valid' : 'invalid'
   const $blockEmail = document.createElement('p')
 
-  $blockEmail['data-email'] = email
+  $blockEmail.setAttribute('data-test', email)
   $blockEmail.id = createUniqueBlockId(containerId, email)
 
   $blockEmail.classList.add('email-block')

@@ -6,9 +6,10 @@ import { createUniqueBlockId } from '../../utils'
 function createIconCloseElement({ email, containerId }, events) {
   const { close } = events
   const $closeIcon = document.createElement('span')
+  const id = createUniqueBlockId(containerId, email)
   $closeIcon.innerHTML = '&times'
   $closeIcon.classList.add('i-close')
-  $closeIcon['data-test'] = createUniqueBlockId(containerId, email)
+  $closeIcon.setAttribute('data-test', id)
 
   $closeIcon.addEventListener('click', event => {
     event.stopPropagation()

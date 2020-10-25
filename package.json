@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:e2e": "cypress open",
     "dev": "webpack serve",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint --ext .js --ignore-path .gitignore",
@@ -20,6 +21,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.0",
+    "cypress": "^5.4.0",
     "eslint": "^7.11.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
