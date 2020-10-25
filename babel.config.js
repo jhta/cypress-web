@@ -9,6 +9,7 @@ module.exports = function(api) {
         targets: {
           safari: '11.1',
           ie: '11',
+          node: 'current',
         },
       },
     ],
@@ -17,10 +18,5 @@ module.exports = function(api) {
   return {
     presets,
     plugins,
-    env: {
-      test: {
-        plugins: ['transform-es2015-modules-commonjs'],
-      },
-    },
   }
 }
