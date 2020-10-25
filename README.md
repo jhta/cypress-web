@@ -1,5 +1,8 @@
 [![test/deploy](https://github.com/jhta/miro/workflows/deploy/badge.svg)](https://github.com/jhta/miro/actions)
 
+[![e2e](https://github.com/jhta/miro/workflows/e2e/badge.svg)](https://github.com/jhta/miro/actions)
+
+
 # Miro Test Assignment
 
 [DEMO](https://jhta.github.io)
