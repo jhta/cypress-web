@@ -3,7 +3,6 @@
 ![coverage](https://github.com/jhta/miro/blob/main/coverage/badge-statements.svg)
 ![coverage](https://github.com/jhta/miro/blob/main/coverage/badge-lines.svg)
 
-
 # Miro Test Assignment
 
 ## [DEMO](https://jhta.github.io)
@@ -38,10 +37,35 @@ All the bussiness requirements described in the test assignment are validated wi
 ## How to use?
 
 ```js
-
 import EmailInput from '.src/lib'
 
 const $container = document.querySelector('#my-email-input-container')
+
+const emailInput = EmailInput($container)
+```
+
+or
+
+```html
+<head>
+  <script src="./app.bundle.js"></script>
+</head>
+
+<script>
+  const $container = document.querySelector('#my-email-input-container')
+  var emailsInput = new EmailsInput($container)
+</script>
+```
+
+Options:
+
+```js
+import EmailInput from '.src/lib'
+const $container = document.querySelector('#my-email-input-container')
+
+const options = {
+  placeholder: 'my new placeholder', //default: add more people
+}
 
 const emailInput = EmailInput($container)
 ```
@@ -82,11 +106,13 @@ yarn test
 ```
 
 ## run test coverage
+
 ```bash
 yarn test:coverage
 ```
 
 ## run test automation
+
 ```bash
 yarn test:e2e
 ```
@@ -118,8 +144,6 @@ yarn lint
       - `/block-email`, `/close-icon`, `/input`, `/wrapper`. Element factories that follow the same pattern. All of them receive the params `props` and `events` in order to create the respective HTML element and attach the events.
       - `/email-input` Constructor function for `EmailInput`, it includes all the data state logic, operations and event delegation to the other Elements.
 
-
-
 ## Git Hooks
 
 ### pre-commit
@@ -129,5 +153,3 @@ It check the linter until commit
 ### pre-push
 
 It run the unit testing until push
-
-
