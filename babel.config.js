@@ -5,7 +5,7 @@ module.exports = function(api) {
       '@babel/preset-env',
       {
         corejs: { version: 3 },
-        useBuiltIns: 'usage',
+        useBuiltIns: 'entry',
         targets: {
           safari: '11.1',
           ie: '11',

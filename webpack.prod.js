@@ -1,14 +1,12 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     app: ['@babel/polyfill', './src/app/index.js'],
   },
   plugins: [
-    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new HtmlWebpackPlugin({
       title: 'App - Production',
       template: './src/app/index.html',
@@ -17,23 +15,39 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'build'),
+    environment: {
+      arrowFunction: false,
+      destructuring: false,
+      module: false,
+    },
   },
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  corejs: { version: 3 },
+                  useBuiltIns: 'entry',
+                  targets: {
+                    esmodules: true,
+                    ie: '11',
+                  },
+                },
+              ],
+            ],
+          },
         },
       },
       {
         test: /\.less$/i,
         use: ['style-loader', 'css-loader', 'less-loader'],
-      },
-      {
-        test: /\.(png|svg|jpg|gif|woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: ['file-loader'],
       },
     ],
   },

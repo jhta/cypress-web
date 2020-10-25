@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
   mode: 'development',
   entry: {
-    app: './src/app/index.js',
+    app: ['@babel/polyfill', './src/app/index.js'],
   },
   devtool: 'inline-source-map',
   devServer: {
