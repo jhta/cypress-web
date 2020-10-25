@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
   mode: 'production',
   entry: {
-    app: ['core-js/stable', './src/app/index.js'],
+    app: ['@babel/polyfill', './src/app/index.js'],
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
